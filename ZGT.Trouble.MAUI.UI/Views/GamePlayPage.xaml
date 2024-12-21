@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ZGT.Trouble.MAUI.UI.Views.GamePlayPage">
+    <ScrollView VerticalScrollBarVisibility="Always" Orientation="Vertical">
+        <ScrollView HorizontalScrollBarVisibility="Always" Orientation="Horizontal">
+            <VerticalStackLayout x:Name="Vlayout"  WidthRequest="1400" HeightRequest="1500">
+                <HorizontalStackLayout>
+                    <Label Text="Player 1: "
+                    TextColor="Black"
+                    BackgroundColor="Yellow"
+                    CharacterSpacing="10" 
+                    x:Name="Player1"
+                    Padding="2"
+                    Margin="2"/>
+                    <Label Text="Player 2: "
+                    TextColor="Black"
+                    BackgroundColor="Blue"
+                    CharacterSpacing="10" 
+                    x:Name="Player2"
+                    Padding="2"
+                    Margin="2"/>
+                    <Label Text="Player 3: "
+                    TextColor="Black"
+                    BackgroundColor="Red"
+                    CharacterSpacing="10" 
+                    x:Name="Player3"
+                    Padding="2"
+                    Margin="2"
+                    />
+                    <Label Text="Player 4: "
+                    TextColor="Black"
+                    BackgroundColor="Green"
+                    CharacterSpacing="10" 
+                    x:Name="Player4"
+                    Padding="2"
+                    Margin="2"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="Current Turn"
+                       TextColor="Black"
+                       CharacterSpacing="10" 
+                       x:Name="CurrentPlayer"
+                       Padding="2"
+                       Margin="5"/>
+                    <Label Text="Die Roll : "
+                       BackgroundColor="White"
+                       TextColor="Black"
+                       CharacterSpacing="10" 
+                       x:Name="DieRoll"
+                       Padding="2"
+                       Margin="5"/>
+                    <Button Text="AddComputer"
+                       BorderWidth="1"
+                       BorderColor="Black"
+                       BackgroundColor="White"
+                       TextColor="Black"
+                       CharacterSpacing="10" 
+                       x:Name="btnAddComputer"
+                       Margin="5"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Entry Text="1"
+                       TextColor="Black"
+                       BackgroundColor="White"
+                       CharacterSpacing="10" 
+                       x:Name="xLabel"
+                       Margin="5"/>
+                    <Entry Text="1"
+                       BackgroundColor="White"
+                       TextColor="Black"
+                       CharacterSpacing="10" 
+                       x:Name="yLabel"
+                       Margin="5"/>
+                    <Entry Text="1"
+                       TextColor="Black"
+                       BackgroundColor="White"
+                       CharacterSpacing="10" 
+                       x:Name="widthLabel"
+                       Margin="5"/>
+                    <Entry Text="1"
+                       BackgroundColor="White"
+                       TextColor="Black"
+                       CharacterSpacing="10" 
+                       x:Name="heightLabel"
+                       Margin="5"/>
+                    <Button Text="Draw"
+                       BackgroundColor="White"
+                       TextColor="Black"
+                       CharacterSpacing="10" 
+                       x:Name="Draw"
+                       Margin="5"/>
+                    <Stepper 
+                       Value="1"
+                       Increment="1"
+                       Maximum="5"
+                       Minimum="1"
+                       BackgroundColor="White"
+                       x:Name="StepperResize"
+                       Margin="5"
+                       ValueChanged="StepperResize_ValueChanged"/>
+                    <Entry Text="1"
+                       BackgroundColor="White"
+                       TextColor="Black"
+                       CharacterSpacing="10" 
+                       x:Name="DisplayStepper"
+                       IsReadOnly="True"
+                       Margin="5"/>
+                    <Button Text="Resize"
+                       BackgroundColor="White"
+                       TextColor="Black"
+                       CharacterSpacing="10" 
+                       x:Name="btnResize"
+                       Margin="5"/>
+                </HorizontalStackLayout>
+
+                <GraphicsView x:Name="graphicsView"  WidthRequest="500" HeightRequest="250"
+                HorizontalOptions="Start"  VerticalOptions="Center"/>
+
+                <HorizontalStackLayout>
+                    <Entry Text="StartSquare:"
+                       TextColor="White"
+                       BackgroundColor="Black"
+                       CharacterSpacing="10" 
+                       x:Name="StartSquare"
+                       IsReadOnly="True"
+                       Margin="5"/>
+                    <Picker x:Name="pickerStart"
+                        Title="Select Start Square"
+                        SelectedIndex="1">
+                    </Picker>
+                    <Entry Text="EndSquare:"
+                       BackgroundColor="Black"
+                       TextColor="White"
+                       CharacterSpacing="10" 
+                       x:Name="EndSquare"
+                       IsReadOnly="True"
+                       Margin="5"/>
+                    <Picker x:Name="pickerEnd"
+                        Title="Select End Square"
+                        SelectedIndex="1">
+                    </Picker>
+                    <Button Text="Move"
+                       BorderWidth="5"
+                       BorderColor="Gray"
+                       BackgroundColor="Black"
+                       TextColor="White"
+                       CharacterSpacing="10" 
+                       x:Name="Move"
+                       Margin="5"                            
+                     />
+                    <Button Text="Skip Turn"
+                       BorderWidth="5"
+                       BorderColor="Gray"
+                       BackgroundColor="Black"
+                       TextColor="White"
+                       CharacterSpacing="10" 
+                       x:Name="SkipTurn"
+                       Margin="5"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="Start">
+                    <ScrollView HeightRequest="252" WidthRequest="520" VerticalScrollBarVisibility="Always" Orientation="Vertical">
+                        <Editor 
+                               Text=""
+                               AutoSize="TextChanges"
+                               BackgroundColor="White"
+                               TextColor="Black"
+                               x:Name="ShowChatMessage"
+                               IsReadOnly="True"
+                               Margin="5"
+                               WidthRequest="520"
+                               HorizontalOptions="Start"
+                               MaximumWidthRequest="520"
+                               IsEnabled="true"/>
+                    </ScrollView>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="Start">
+                    <Entry Text="Type a Message..."
+                       BackgroundColor="White"
+                       TextColor="Black"
+                       x:Name="TypeMessage"
+                       Margin="5"
+                       HeightRequest="50"
+                       WidthRequest="200"
+                    />
+                    <Button Text="Chat"
+                       BackgroundColor="White"
+                       TextColor="Black"
+                       x:Name="btnChat"
+                       Margin="5"
+                       HeightRequest="50"
+                       WidthRequest="75"
+                    />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </ScrollView>
+</ContentPage>

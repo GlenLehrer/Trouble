@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ZGT.Trouble.MAUI.UI.Views.JoinGameRoomPage"
+             x:Name="GameRoom">
+
+    <ScrollView x:Name="scroll" VerticalScrollBarVisibility="Always" Orientation="Vertical">
+        <ScrollView x:Name="hScroll" HorizontalScrollBarVisibility="Always" Orientation="Horizontal">
+            <VerticalStackLayout x:Name="views"  WidthRequest="1000" HeightRequest="1500" VerticalOptions="FillAndExpand">
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </ScrollView>
+</ContentPage>
+<!-- Old code, not needed now
+    
+    <StackLayout x:Name="stacklayout" Margin="0" BackgroundColor="MediumSeaGreen">
+    <CollectionView x:Name="cvGames" ItemsSource="{Binding entities}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" ColumnSpacing="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="1"
+                               Grid.Column="1" 
+                               Text="{Binding GameNumber}"
+                               FontAttributes="Bold" 
+                               TextColor="Black"
+                               FontSize="24"/>
+                        <Label Grid.Row="1"
+                               Grid.RowSpan="4"
+                               Grid.Column="2" 
+                               Text="{Binding UserNamesAndColor}"
+                               TextColor="Black"
+                               FontSize="24"/>
+                        <Label Grid.Row="1"
+                               Grid.Column="3" 
+                               Text="{Binding IsGameStarted}"
+                               FontAttributes="Italic" 
+                               TextColor="Black"
+                               FontSize="24"/>
+                        <Button Grid.Row="1"
+                                Grid.Column="4" 
+                                Grid.RowSpan="4"
+                                Text="JoinGame"
+                                FontAttributes="Bold" 
+                                TextColor="Black"
+                                BackgroundColor="White"
+                                FontSize="24"
+                                Clicked="Button_Clicked"
+                                />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>-->
+
+
+

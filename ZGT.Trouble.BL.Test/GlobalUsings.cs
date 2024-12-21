@@ -1,0 +1,13 @@
+﻿global using Microsoft.VisualStudio.TestTools.UnitTesting;
+global using ZGT.Trouble.PL.Data;
+global using ZGT.Trouble.PL.Entities;
+global using ZGT.Trouble.BL.Models;
+global using Microsoft.EntityFrameworkCore.Storage;
+global using Microsoft.EntityFrameworkCore;
+global using System;
+global using System.Linq;
+global using Microsoft.Extensions.Configuration;
+global using System.Collections.Generic;
+global using System.IO;
+global using System.Threading.Tasks;
+global using System.Security.AccessControl;

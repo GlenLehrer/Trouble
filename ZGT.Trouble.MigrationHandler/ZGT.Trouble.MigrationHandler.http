@@ -1,0 +1,6 @@
+@ZGT.Trouble.MigrationHandler_HostAddress = http://localhost:5283
+
+GET {{ZGT.Trouble.MigrationHandler_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

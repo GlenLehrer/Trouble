@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ZGT.Trouble.MAUI.UI.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ZGT.Trouble.MAUI.UI.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Title="ZGT.Trouble.MAUI.UI">
+
+    <TabBar>
+        <Tab Title="Login" Icon="login_icon">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:LoginPage}"
+                Route="LoginPage" />
+        </Tab>
+        <Tab Title="Create Account" Icon="createaccount_icon">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:CreateAccountPage}"
+                Route="CreateAccountPage" />
+        </Tab>
+        <Tab Title="Lobby" Icon="gameroom_icon">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:JoinGameRoomPage}"
+                Route="JoinGameRoomPage" />
+        </Tab>
+        <Tab Title="Game Play" Icon="gamecoffee_icon">
+            <ShellContent
+              ContentTemplate="{DataTemplate local:GamePlayPage}"
+              Route="GamePlayPage" />
+        </Tab>
+    </TabBar>
+</Shell>

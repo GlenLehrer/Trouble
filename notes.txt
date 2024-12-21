@@ -1,0 +1,477 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ZGT.Trouble.PL.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.SqlServer.Server;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+namespace ZGT.Trouble.PL.Data
+{
+    public class TroubleEntities : DbContext
+    {
+        Guid[] PlayerGameId = new Guid[3];
+        Guid[] PlayerId = new Guid[3];
+        Guid[] GameId = new Guid[3];
+
+        public virtual DbSet<tblGame> tblGame { get; set; }
+
+        public virtual DbSet<tblPlayer> tblPlayer { get; set; }
+
+        public virtual DbSet<tblPlayerGame> tblPlayerGame { get; set; }
+
+        public TroubleEntities(DbContextOptions<TroubleEntities> options) : base(options)
+        {
+            //Connection string is not here because it is in Migration project.
+
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+
+        }
+
+        public TroubleEntities()
+        {
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            base.OnModelCreating(modelBuilder);
+
+            CreatePlayers(modelBuilder);
+            CreateGames(modelBuilder);
+            CreatePlayerGames(modelBuilder);
+        }
+
+        private void CreatePlayers(ModelBuilder modelBuilder)
+        {
+            for (int i = 0; i < PlayerId.Length; i++)
+                PlayerId[i] = Guid.NewGuid();
+            /*
+        public Guid Id { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
+        public int NumberOfWins { get; set; }
+        public DateTime DateJoined { get; set; }
+            */
+
+        modelBuilder.Entity<tblPlayer>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PK_tblPlayer_Id");
+
+                entity.ToTable("tblPlayer");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.UserName)
+                    .IsRequired()
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+                entity.Property(e => e.DateJoined).HasColumnType("datetime").IsRequired();
+
+                /*  Foreign Key Format ------------
+                    entity.HasOne(d => d.Rating).WithMany(p => p.Movies)
+                    .HasForeignKey(d => d.RatingId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblMovie_RatingId");
+                 */
+            });
+            List<tblPlayer> Players = new List<tblPlayer>
+            {
+                new tblPlayer {Id = PlayerId[0], UserName = "Glen", Password = "12345", Email = "Glen@Glen", NumberOfWins = 0, DateJoined = DateTime.Now},
+                new tblPlayer {Id = PlayerId[1], UserName = "Zach", Password = "123", Email = "Zach@Zach", NumberOfWins = 0, DateJoined = DateTime.Now},
+                new tblPlayer {Id = PlayerId[2], UserName = "Maple", Password = "Harbor", Email = "maple", NumberOfWins = 0, DateJoined = DateTime.Now},
+            };
+            modelBuilder.Entity<tblPlayer>().HasData(Players);
+            /*
+             //---- Creating default data when there are many fields in each object.
+            modelBuilder.Entity<tblCustomer>().HasData(new tblCustomer
+            {
+                Id = customerId[0],
+                FirstName = "Steve",
+                LastName = "Marin",
+                Address = "453 Oak Street",
+                City = "Fond du Lac",
+                State = "WI",
+                ZIP = "54935",
+                Phone = "9205879797",
+                UserId = userId[0]
+            });
+            */
+
+        }
+
+        private void CreateGames(ModelBuilder modelBuilder)
+        {
+            for (int i = 0; i < GameId.Length; i++)
+                GameId[i] = Guid.NewGuid();
+
+            /*
+                public Guid Id { get; set; }
+                public string PlayerTurn { get; set; }
+                public int DieRoll { get; set; }
+                public DateTime GameStartDate { get; set; }
+                public int GameComplete { get; set; } //0 incomplete, 1 complete
+
+                int YellowHomeSquare1 - 4, Green, Blue, Red
+                string YellowStartSquare, Green, Blue, Red
+                int YellowCenterSquare1 - 4, Green, Blue, Red
+                string Square1 - 24
+            */
+
+            modelBuilder.Entity<tblGame>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PK_tblGame_Id");
+
+                entity.ToTable("tblGame");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.YellowStartSquare)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.GreenStartSquare)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.BlueStartSquare)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.RedStartSquare)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square1)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square2)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square3)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square4)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square5)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square6)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square7)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square8)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square9)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square10)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square11)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square12)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square13)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square14)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square15)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square16)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square17)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square18)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square19)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square20)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square21)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square22)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square23)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.Square24)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.GameStartDate).HasColumnType("datetime").IsRequired();
+
+            });
+
+            
+             //---- Creating default data when there are many fields in each object.
+            modelBuilder.Entity<tblGame>().HasData(new tblGame
+            {
+                Id = GameId[0],
+                PlayerTurn = "Yellow",
+                DieRoll = 6,
+                GameStartDate = DateTime.Now,
+                GameComplete = 0,
+                YellowHomeSquare1 = 1,
+                YellowHomeSquare2 = 1,
+                YellowHomeSquare3 = 1,
+                YellowHomeSquare4 = 1,
+                BlueHomeSquare1 = 1,
+                BlueHomeSquare2 = 1,
+                BlueHomeSquare3 = 1,
+                BlueHomeSquare4 = 1,
+                RedHomeSquare1 = 1,
+                RedHomeSquare2 = 1,
+                RedHomeSquare3 = 1,
+                RedHomeSquare4 = 1,
+                GreenHomeSquare1 = 1,
+                GreenHomeSquare2 = 1,
+                GreenHomeSquare3 = 1,
+                GreenHomeSquare4 = 1,
+                BlueStartSquare = "",
+                YellowStartSquare = "",
+                RedStartSquare = "",
+                GreenStartSquare = "",
+                Square1 = "",
+                Square2 = "",
+                Square3 = "",
+                Square4 = "",
+                Square5 = "",
+                Square6 = "",
+                Square7 = "",
+                Square8 = "",
+                Square9 = "",
+                Square10 = "",
+                Square11 = "",
+                Square12 = "",
+                Square13 = "",
+                Square14 = "",
+                Square15 = "",
+                Square16 = "",
+                Square17 = "",
+                Square18 = "",
+                Square19 = "",
+                Square20 = "",
+                Square21 = "",
+                Square22 = "",
+                Square23 = "",
+                Square24 = "",
+                YellowCenterSquare1 = 0,
+                YellowCenterSquare2 = 0,
+                YellowCenterSquare3 = 0,
+                YellowCenterSquare4 = 0,
+                BlueCenterSquare1 = 0,
+                BlueCenterSquare2 = 0,
+                BlueCenterSquare3 = 0,
+                BlueCenterSquare4 = 0,
+                RedCenterSquare1 = 0,
+                RedCenterSquare2 = 0,
+                RedCenterSquare3 = 0,
+                RedCenterSquare4 = 0,
+                GreenCenterSquare1 = 0,
+                GreenCenterSquare2 = 0,
+                GreenCenterSquare3 = 0,
+                GreenCenterSquare4 = 0,
+            });
+            modelBuilder.Entity<tblGame>().HasData(new tblGame
+            {
+                Id = GameId[1],
+                PlayerTurn = "Yellow",
+                DieRoll = 1,
+                GameStartDate = DateTime.Now,
+                GameComplete = 0,
+                YellowHomeSquare1 = 1,
+                YellowHomeSquare2 = 1,
+                YellowHomeSquare3 = 1,
+                YellowHomeSquare4 = 1,
+                BlueHomeSquare1 = 1,
+                BlueHomeSquare2 = 1,
+                BlueHomeSquare3 = 1,
+                BlueHomeSquare4 = 1,
+                RedHomeSquare1 = 1,
+                RedHomeSquare2 = 1,
+                RedHomeSquare3 = 1,
+                RedHomeSquare4 = 1,
+                GreenHomeSquare1 = 1,
+                GreenHomeSquare2 = 1,
+                GreenHomeSquare3 = 1,
+                GreenHomeSquare4 = 1,
+                BlueStartSquare = "",
+                YellowStartSquare = "",
+                RedStartSquare = "",
+                GreenStartSquare = "",
+                Square1 = "",
+                Square2 = "",
+                Square3 = "",
+                Square4 = "",
+                Square5 = "",
+                Square6 = "",
+                Square7 = "",
+                Square8 = "",
+                Square9 = "",
+                Square10 = "",
+                Square11 = "",
+                Square12 = "",
+                Square13 = "",
+                Square14 = "",
+                Square15 = "",
+                Square16 = "",
+                Square17 = "",
+                Square18 = "",
+                Square19 = "",
+                Square20 = "",
+                Square21 = "",
+                Square22 = "",
+                Square23 = "",
+                Square24 = "",
+                YellowCenterSquare1 = 0,
+                YellowCenterSquare2 = 0,
+                YellowCenterSquare3 = 0,
+                YellowCenterSquare4 = 0,
+                BlueCenterSquare1 = 0,
+                BlueCenterSquare2 = 0,
+                BlueCenterSquare3 = 0,
+                BlueCenterSquare4 = 0,
+                RedCenterSquare1 = 0,
+                RedCenterSquare2 = 0,
+                RedCenterSquare3 = 0,
+                RedCenterSquare4 = 0,
+                GreenCenterSquare1 = 0,
+                GreenCenterSquare2 = 0,
+                GreenCenterSquare3 = 0,
+                GreenCenterSquare4 = 0,
+            });
+            modelBuilder.Entity<tblGame>().HasData(new tblGame
+            {
+                Id = GameId[2],
+                PlayerTurn = "Yellow",
+                DieRoll = 3,
+                GameStartDate = DateTime.Now,
+                GameComplete = 0,
+                YellowHomeSquare1 = 1,
+                YellowHomeSquare2 = 1,
+                YellowHomeSquare3 = 1,
+                YellowHomeSquare4 = 1,
+                BlueHomeSquare1 = 1,
+                BlueHomeSquare2 = 1,
+                BlueHomeSquare3 = 1,
+                BlueHomeSquare4 = 1,
+                RedHomeSquare1 = 1,
+                RedHomeSquare2 = 1,
+                RedHomeSquare3 = 1,
+                RedHomeSquare4 = 1,
+                GreenHomeSquare1 = 1,
+                GreenHomeSquare2 = 1,
+                GreenHomeSquare3 = 1,
+                GreenHomeSquare4 = 1,
+                BlueStartSquare = "",
+                YellowStartSquare = "",
+                RedStartSquare = "",
+                GreenStartSquare = "",
+                Square1 = "",
+                Square2 = "",
+                Square3 = "",
+                Square4 = "",
+                Square5 = "",
+                Square6 = "",
+                Square7 = "",
+                Square8 = "",
+                Square9 = "",
+                Square10 = "",
+                Square11 = "",
+                Square12 = "",
+                Square13 = "",
+                Square14 = "",
+                Square15 = "",
+                Square16 = "",
+                Square17 = "",
+                Square18 = "",
+                Square19 = "",
+                Square20 = "",
+                Square21 = "",
+                Square22 = "",
+                Square23 = "",
+                Square24 = "",
+                YellowCenterSquare1 = 0,
+                YellowCenterSquare2 = 0,
+                YellowCenterSquare3 = 0,
+                YellowCenterSquare4 = 0,
+                BlueCenterSquare1 = 0,
+                BlueCenterSquare2 = 0,
+                BlueCenterSquare3 = 0,
+                BlueCenterSquare4 = 0,
+                RedCenterSquare1 = 0,
+                RedCenterSquare2 = 0,
+                RedCenterSquare3 = 0,
+                RedCenterSquare4 = 0,
+                GreenCenterSquare1 = 0,
+                GreenCenterSquare2 = 0,
+                GreenCenterSquare3 = 0,
+                GreenCenterSquare4 = 0,
+            });
+
+        }
+
+        private void CreatePlayerGames(ModelBuilder modelBuilder)
+        {
+            for (int i = 0; i < PlayerGameId.Length; i++)
+                PlayerGameId[i] = Guid.NewGuid();
+
+            /*
+            public Guid Id { get; set; }
+            public Guid PlayerId { get; set; }
+            public Guid GameId { get; set; }
+            */
+
+            modelBuilder.Entity<tblPlayerGame>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PK_tblPlayerGame_Id");
+
+                entity.ToTable("tblPlayerGame");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.PlayerId).ValueGeneratedNever().IsRequired();
+                entity.Property(e => e.GameId).ValueGeneratedNever().IsRequired();
+
+                entity.HasOne(d => d.Player).WithMany(p => p.PlayerGame)
+                .HasForeignKey(d => d.PlayerId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tblPlayerGame_PlayerId");
+
+                entity.HasOne(g => g.Game).WithMany(p => p.PlayerGame)
+                .HasForeignKey(g => g.GameId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tblPlayerGame_GameId");
+
+            });
+            List<tblPlayerGame> PlayerGames = new List<tblPlayerGame>
+            {
+                new tblPlayerGame {Id = PlayerGameId[0], PlayerId = PlayerId[0], GameId = GameId[0]},
+                new tblPlayerGame {Id = PlayerGameId[1], PlayerId = PlayerId[1], GameId = GameId[1]},
+                new tblPlayerGame {Id = PlayerGameId[2], PlayerId = PlayerId[2], GameId = GameId[2]},
+            };
+            modelBuilder.Entity<tblPlayerGame>().HasData(PlayerGames);
+
+        }
+    }
+}

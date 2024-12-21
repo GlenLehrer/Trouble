@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework> 
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>ZGT.Trouble.API.xml</DocumentationFile>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Azure.Security.KeyVault.Certificates" Version="4.6.0" />
+		<PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.6.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Serilog" Version="4.0.1" />
+		<PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="8.0.2" />
+		<PackageReference Include="Serilog.Sinks.MSSqlServer" Version="6.6.1" />
+		<PackageReference Include="Serilog.UI" Version="2.6.0" />
+		<PackageReference Include="Serilog.Ui.MsSqlServerProvider" Version="2.2.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
+
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.10" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" NoWarn="NU1605" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.10" NoWarn="NU1605" />
+		<PackageReference Include="Microsoft.Identity.Web" Version="2.19.1" />
+		<PackageReference Include="Microsoft.Identity.Web.DownstreamApi" Version="2.15.2" />
+		<PackageReference Include="Microsoft.Identity.Web.UI" Version="2.19.1" />
+
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZGT.Trouble.BL.Models\ZGT.Trouble.BL.Models.csproj" />
+    <ProjectReference Include="..\ZGT.Trouble.BL\ZGT.Trouble.BL.csproj" />
+    <ProjectReference Include="..\ZGT.Trouble.PL\ZGT.Trouble.PL.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ZGT.Trouble.MAUI.UI.Views.LoginPage">
+
+
+    <Grid Padding="20,20">
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="auto"/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="75"/>
+
+        </Grid.ColumnDefinitions>
+        <Border StrokeThickness="1" Stroke="Black" Margin="10, 0" Grid.Row="2" Grid.Column="0">
+            <Entry />
+        </Border>
+
+        <Label Grid.Row="0" Grid.ColumnSpan="3" Text="Login Info"
+            FontSize="Large" FontAttributes="Bold"/>
+
+        <Border Grid.Row="2" Grid.Column="1" StrokeThickness="1" Stroke="Black" Margin="10, 0">
+            <Entry x:Name="txtUser" Placeholder="Enter Username" PlaceholderColor="Grey"/>
+        </Border>
+
+        <Border Grid.Row="4" Grid.Column="1" StrokeThickness="1" Stroke="Black" Margin="10, 0">
+            <Entry x:Name="txtPass" Placeholder="Enter Password" PlaceholderColor="Grey" IsPassword="True"/>
+        </Border>
+
+        <Button Grid.Row="6" Grid.ColumnSpan="3"  Text="Login" Clicked="Login_Clicked"/>
+        <Button Grid.Row="8" Grid.ColumnSpan="3"  Text="Create User" BackgroundColor="Green" Clicked="CreateAccount_Clicked"/>
+
+    </Grid>
+
+</ContentPage>

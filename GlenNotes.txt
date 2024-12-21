@@ -1,0 +1,10 @@
+Code First.  Make sure solution builds.
+Create PL, TroubleEntities, and tbl PL files.
+Make sure migration script Program.cs is correct.  Have connection string in appsettings.json and reference connection string in migration project (ASP.Net Core Web API prpject) in program.cs.
+
+Open Nuget Package Manager Console.  Set default project as PL.
+
+Set MigrationHandler as startup project.
+
+Add-Migration CreateDatabase
+Update-Database 

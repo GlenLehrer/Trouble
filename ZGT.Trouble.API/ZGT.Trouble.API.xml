@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ZGT.Trouble.API</name>
+    </assembly>
+    <members>
+        <member name="M:ZGT.Trouble.API.Controllers.GameController.MakeMoveAsync(ZGT.Trouble.BL.Models.Game,System.Int32,System.Int32)">
+            <summary>
+            Try to make a move
+            </summary>
+            <param name="game"></param>
+            <param name="startSquare"></param>
+            <param name="endSquare"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZGT.Trouble.API.Controllers.GameController.SkipMoveAsync(ZGT.Trouble.BL.Models.Game)">
+            <summary>
+            Skip your move
+            </summary>
+            <param name="game"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZGT.Trouble.API.Controllers.GenericController`3.Get">
+            <summary>
+            Get all entities of a particular type
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZGT.Trouble.API.Controllers.GenericController`3.Get(System.Guid)">
+            <summary>
+            Get a particular entity 
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZGT.Trouble.API.Controllers.GenericController`3.Post(`0,System.Boolean)">
+            <summary>
+            Insert
+            </summary>
+            <param name="entity"></param>
+            <param name="rollback"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZGT.Trouble.API.Controllers.GenericController`3.Put(System.Guid,`0,System.Boolean)">
+            <summary>
+            Update an entity
+            </summary>
+            <param name="id"></param>
+            <param name="entity"></param>
+            <param name="rollback"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZGT.Trouble.API.Controllers.GenericController`3.Delete(System.Guid,System.Boolean)">
+            <summary>
+            Delete an entity
+            </summary>
+            <param name="id"></param>
+            <param name="rollback"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZGT.Trouble.API.Controllers.PlayerController.Login(ZGT.Trouble.BL.Models.Player)">
+            <summary>
+            Login
+            </summary>
+            <param name="player"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

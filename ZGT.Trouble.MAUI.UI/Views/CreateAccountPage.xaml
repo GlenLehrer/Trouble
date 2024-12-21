@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ZGT.Trouble.MAUI.UI.Views.CreateAccountPage">
+
+    <Grid Padding="20,20">
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="auto"/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="75"/>
+
+        </Grid.ColumnDefinitions>
+        <Border StrokeThickness="1" Stroke="Black" Margin="10, 0" Grid.Row="2" Grid.Column="0">
+            <Entry />
+        </Border>
+
+        <Label Grid.Row="0" Grid.ColumnSpan="3" Text="Account Information"
+               FontSize="Large" FontAttributes="Bold"/>
+
+        <Border Grid.Row="2" Grid.Column="1" StrokeThickness="1" Stroke="Black" Margin="10, 0">
+            <Entry x:Name = "txtUser" Placeholder="Enter Username" PlaceholderColor="Grey" Keyboard="Text"/>
+        </Border>
+
+        <Border Grid.Row="4" Grid.Column="1" StrokeThickness="1" Stroke="Black" Margin="10, 0">
+            <Entry x:Name = "txtPass" Placeholder="Enter Password" PlaceholderColor="Grey" IsPassword="True"/>
+        </Border>
+
+        <Border Grid.Row="6" Grid.Column="1" StrokeThickness="1" Stroke="Black" Margin="10, 0">
+            <Entry x:Name = "txtPass2" Placeholder="Re-Enter Password" PlaceholderColor="Grey" IsPassword="True"/>
+        </Border>
+
+        <Border Grid.Row="8" Grid.Column="1" StrokeThickness="1" Stroke="Black" Margin="10, 0">
+            <Entry x:Name = "txtEmail" Placeholder="Enter Email Address" PlaceholderColor="Grey" Keyboard="Email"/>
+        </Border>
+
+        <Button Grid.Row="10" Grid.ColumnSpan="3"  Text="Create Account" Clicked="CreateUser_Clicked"/>
+
+
+    </Grid>
+
+</ContentPage>
